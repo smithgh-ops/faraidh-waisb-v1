@@ -1,0 +1,313 @@
+{
+  "workspace": {
+    "name": "Faraidh WAISB Smart Brief System",
+    "description": "AI-assisted Islamic inheritance calculator with 124-file structure and 5 mazhab support",
+    "version": "1.0.0",
+    "repository": "https://github.com/YOUR_USERNAME/faraidh-waisb",
+    "ai_system": "GitHub Copilot Workspace with Claude Sonnet 4.5",
+    "created": "2026-01-07",
+    "optimized_for": "GitHub Copilot"
+  },
+  "briefing_system": {
+    "type": "smart-brief-v1-optimized",
+    "structure": "21-file-option-a",
+    "total_files": 21,
+    "json_files": 12,
+    "markdown_files": 6,
+    "script_files": 3,
+    "features": [
+      "Atomic updates with rollback",
+      "Automatic consistency validation",
+      "GitHub Actions CI/CD",
+      "Split JSON for optimal context loading"
+    ]
+  },
+  "priority_read_order": [
+    {
+      "order": 1,
+      "file": "STATUS.json",
+      "description": "Current project state, phase, active task",
+      "read_frequency": "every_session",
+      "size": "~120 lines",
+      "update_trigger": "task_start, task_complete",
+      "critical": true,
+      "purpose": "Know what's happening NOW"
+    },
+    {
+      "order": 2,
+      "file": "PROGRESS.json",
+      "description": "Progress metrics, file completion status",
+      "read_frequency": "every_session",
+      "size": "~180 lines",
+      "update_trigger": "task_complete",
+      "critical": true,
+      "purpose": "Track overall progress"
+    },
+    {
+      "order": 3,
+      "file": "TASKS_FIXED.json",
+      "description": "All task definitions with dependencies",
+      "read_frequency": "when_planning",
+      "size": "~300 lines",
+      "update_trigger": "task_status_change",
+      "critical": true,
+      "purpose": "Understand what needs to be done"
+    },
+    {
+      "order": 4,
+      "file": "BLOCKERS.json",
+      "description": "Critical blockers and resolved issues",
+      "read_frequency": "daily",
+      "size": "~120 lines",
+      "update_trigger": "blocker_change",
+      "critical": true,
+      "purpose": "Identify blocking issues"
+    },
+    {
+      "order": 5,
+      "file": "QUICKSTART_FIXED.md",
+      "description": "Quick start guide and workflow",
+      "read_frequency": "first_session",
+      "size": "~150 lines",
+      "update_trigger": "rarely",
+      "critical": false,
+      "purpose": "Learn the workflow"
+    },
+    {
+      "order": 6,
+      "file": "AI_RULES.md",
+      "description": "AI interaction rules and best practices",
+      "read_frequency": "first_session",
+      "size": "~400 lines",
+      "update_trigger": "rarely",
+      "critical": false,
+      "purpose": "Follow interaction guidelines"
+    }
+  ],
+  "file_metadata": {
+    "STATUS.json": {
+      "purpose": "Current project state and active task tracking",
+      "size_limit": "150 lines max",
+      "update_frequency": "every_task",
+      "updated_by": ["update-all.js", "manual"],
+      "critical": true,
+      "schema": "See SCHEMAS.md#status",
+      "contains": ["project info", "metadata", "current phase", "active task", "next task", "environment"]
+    },
+    "PROGRESS.json": {
+      "purpose": "Progress metrics and file completion tracking",
+      "size_limit": "200 lines max",
+      "update_frequency": "every_task",
+      "updated_by": ["update-all.js", "generate-summary.js"],
+      "critical": true,
+      "schema": "See SCHEMAS.md#progress",
+      "contains": ["overall progress", "by category breakdown", "tasks status", "velocity metrics"]
+    },
+    "BLOCKERS.json": {
+      "purpose": "Critical blocker tracking",
+      "size_limit": "200 lines max",
+      "update_frequency": "when_needed",
+      "updated_by": ["update-all.js", "manual"],
+      "critical": true,
+      "contains": ["active blockers", "resolved blockers", "mitigation strategies"]
+    },
+    "TASKS_FIXED.json": {
+      "purpose": "Task definitions with dependencies",
+      "size_limit": "400 lines max",
+      "update_frequency": "when_task_changes",
+      "updated_by": ["update-all.js", "manual"],
+      "critical": true,
+      "schema": "See SCHEMAS.md#tasks",
+      "contains": ["task definitions", "dependencies", "acceptance criteria", "deliverables"]
+    },
+    "CHANGELOG.json": {
+      "purpose": "Structured task completion history",
+      "size_limit": "unlimited (append-only)",
+      "update_frequency": "every_commit",
+      "updated_by": ["update-all.js", "manual"],
+      "critical": false,
+      "contains": ["entries", "summary", "metrics per task"]
+    },
+    "ENVIRONMENT.json": {
+      "purpose": "Project environment and tech stack",
+      "size_limit": "300 lines max",
+      "update_frequency": "rarely",
+      "updated_by": ["manual"],
+      "critical": false
+    },
+    "HEALTH.json": {
+      "purpose": "Code quality and health metrics",
+      "size_limit": "200 lines max",
+      "update_frequency": "weekly",
+      "updated_by": ["validate-task.js", "validate-data.js"],
+      "critical": false
+    }
+  },
+  "copilot_workflow": {
+    "onboarding": {
+      "description": "First-time Copilot workspace setup",
+      "steps": [
+        "Read STATUS.json, PROGRESS.json, TASKS_FIXED.json (in order)",
+        "Read QUICKSTART_FIXED.md for workflow understanding",
+        "Read AI_RULES.md for interaction guidelines",
+        "Read .copilot-config.json (this file) for automation",
+        "Confirm understanding of Smart Brief System",
+        "Ask user which task to execute next"
+      ],
+      "expected_duration": "5-10 minutes"
+    },
+    "before_task": {
+      "description": "Pre-task context loading",
+      "steps": [
+        "Read STATUS.json to get current state and active task",
+        "Read PROGRESS.json to understand current progress",
+        "Load task details from TASKS_FIXED.json",
+        "Check BLOCKERS.json for any blocking issues",
+        "Verify all dependencies are completed",
+        "Review acceptance criteria from TASKS_FIXED.json",
+        "Confirm with user before starting execution"
+      ],
+      "expected_duration": "2-3 minutes"
+    },
+    "during_task": {
+      "description": "Task execution guidelines",
+      "steps": [
+        "Follow acceptance criteria from TASKS_FIXED.json strictly",
+        "Create ALL deliverables listed in task definition",
+        "Follow code style guidelines from TEMPLATES.md",
+        "Add JSDoc comments for functions (80%+ coverage)",
+        "Add inline comments for complex logic only",
+        "Test functionality manually before marking complete",
+        "Use Fraction.js for all waris calculations (NO decimals!)",
+        "Ensure responsive design for all UI components"
+      ]
+    },
+    "after_task": {
+      "description": "Post-task update workflow (CRITICAL!)",
+      "steps": [
+        "Use update-all.js for atomic updates (MANDATORY)",
+        "Update STATUS.json: mark task complete, set next task",
+        "Update PROGRESS.json: increment files/progress %",
+        "Update TASKS_FIXED.json: mark completed, update blocks",
+        "Add entry to CHANGELOG.json with full metrics",
+        "Update BLOCKERS.json if blocker resolved",
+        "Run validate-consistency.js (MANDATORY)",
+        "Create git commit with structured message format",
+        "Ask user to review changes before pushing"
+      ],
+      "expected_duration": "5-10 minutes"
+    },
+    "validation": {
+      "description": "Mandatory validation steps",
+      "required": [
+        "Always run validate-consistency.js after JSON updates",
+        "Never commit without validation passing (exit code 0)",
+        "Always use update-all.js for multi-file updates",
+        "Always check git diff before committing",
+        "Test deliverables manually before marking task complete"
+      ],
+      "commands": [
+        "node .ai/validate-consistency.js",
+        "node .ai/update-all.js test",
+        "git diff .ai/"
+      ]
+    }
+  },
+  "automation_scripts": {
+    "validate-consistency.js": {
+      "description": "Validates consistency across all JSON files",
+      "usage": "node .ai/validate-consistency.js",
+      "when_to_run": "After any JSON file update (MANDATORY)",
+      "exit_code": "0 = success, 1 = failure",
+      "checks": [
+        "Progress calculation accuracy",
+        "Timestamp synchronization",
+        "Task count consistency",
+        "Active task validation",
+        "Dependency checks",
+        "Blocker count validation",
+        "Changelog entry count",
+        "File category totals",
+        "Completed files count",
+        "Project name consistency"
+      ]
+    },
+    "update-all.js": {
+      "description": "Atomic update for multiple JSON files",
+      "usage": "const { atomicUpdate } = require('./.ai/update-all.js')",
+      "when_to_run": "When updating multiple files simultaneously",
+      "features": ["atomic updates", "auto-rollback on failure", "built-in validation"],
+      "example": "await atomicUpdate({ 'STATUS.json': {...}, 'PROGRESS.json': {...} })"
+    },
+    "generate-summary.js": {
+      "description": "Auto-generates SUMMARY_FIXED.md from JSON",
+      "usage": "node .ai/generate-summary.js",
+      "when_to_run": "After task completion or weekly",
+      "output": "SUMMARY_FIXED.md"
+    },
+    "validate-task.js": {
+      "description": "Validates task completion vs acceptance criteria",
+      "usage": "node .ai/validate-task.js <task-id>",
+      "when_to_run": "Before marking task as complete",
+      "output": "Validation report with pass/fail per criteria"
+    }
+  },
+  "github_integration": {
+    "workflows": {
+      "validate-briefing.yml": {
+        "location": ".github/workflows/validate-briefing.yml",
+        "trigger": ["push to .ai/**", "pull_request to .ai/**"],
+        "actions": [
+          "Validate JSON syntax (jq)",
+          "Check required files exist",
+          "Run validate-consistency.js",
+          "Check file sizes (warn if > 50 KB)",
+          "Generate SUMMARY_FIXED.md (on main branch)",
+          "Auto-commit summary updates"
+        ],
+        "runs_on": "ubuntu-latest",
+        "node_version": "18"
+      }
+    },
+    "commit_message_format": {
+      "pattern": "<type>: <description>\n\n<details>",
+      "types": {
+        "feat": "New feature or task completion",
+        "fix": "Bug fix",
+        "docs": "Documentation update",
+        "refactor": "Code refactoring",
+        "test": "Add or update tests",
+        "chore": "Maintenance (dependencies, config, etc)"
+      },
+      "example": "feat: Complete task-001 - Extract CSS files\n\n- Created 5 CSS files (style, form, result, modal, responsive)\n- Updated HTML <link> tags in index.html & step-form.html\n- Removed inline <style> tags\n- Progress: 4.0% → 8.1%\n- Resolved blocker-002"
+    }
+  },
+  "best_practices": {
+    "file_size": "Keep JSON files under 200 lines for optimal Copilot context loading",
+    "updates": "Always use update-all.js for multi-file updates to ensure atomicity",
+    "validation": "Run validate-consistency.js before every commit (enforced by Git hooks)",
+    "git": "One task = one commit with structured message following conventional commits",
+    "testing": "Test all deliverables manually before marking task complete",
+    "documentation": "Update briefing files immediately after task completion",
+    "code_quality": "Follow JSDoc standards, 80%+ comment coverage for functions",
+    "responsiveness": "Test all UI on mobile, tablet, desktop before completion",
+    "performance": "Keep bundle sizes small, lazy-load when possible"
+  },
+  "common_commands": {
+    "validate": "node .ai/validate-consistency.js",
+    "test_update": "node .ai/update-all.js test",
+    "generate_summary": "node .ai/generate-summary.js",
+    "validate_task": "node .ai/validate-task.js task-001",
+    "git_status": "git status",
+    "git_diff": "git diff .ai/",
+    "git_commit": "git commit -m 'feat: Complete task-XXX - Description'"
+  },
+  "tips_for_copilot": {
+    "context_loading": "Load STATUS → PROGRESS → TASKS in order for best context",
+    "file_splitting": "If a file approaches 200 lines, consider splitting it",
+    "error_handling": "Always use try-catch for file operations and API calls",
+    "code_comments": "Focus comments on WHY, not WHAT (code should be self-explanatory)",
+    "testing": "Test edge cases: empty inputs, invalid data, concurrent updates",
+    "git_workflow": "Feature branch → PR → Review → Merge to main"
+  }
+}
