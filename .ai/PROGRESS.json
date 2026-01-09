@@ -1,0 +1,279 @@
+{
+  "project": "Faraidh WAISB",
+  "last_update": "2026-01-09T05:47:00+07:00",
+  "updated_by": "Option A migration",
+  "overall": {
+    "progress_percentage": 4.0,
+    "completed_files": 5,
+    "total_files": 124,
+    "pending_files": 119,
+    "completion_status": "4.0% (5/124 files)",
+    "estimated_completion": "2026-04-15"
+  },
+  "by_category": {
+    "html": {
+      "total": 8,
+      "completed": 2,
+      "in_progress": 0,
+      "pending": 6,
+      "percentage": 25.0,
+      "files": [
+        {
+          "name": "index.html",
+          "size": "19.8 KB",
+          "status": "completed",
+          "completeness": 70,
+          "notes": "Needs PWA meta tags"
+        },
+        {
+          "name": "step-form.html",
+          "size": "49.8 KB",
+          "status": "completed",
+          "completeness": 75,
+          "notes": "Needs JS integration"
+        }
+      ],
+      "missing": [
+        "result.html",
+        "about.html",
+        "help.html",
+        "privacy.html",
+        "terms.html",
+        "404.html"
+      ]
+    },
+    "css": {
+      "total": 5,
+      "completed": 0,
+      "in_progress": 0,
+      "pending": 5,
+      "percentage": 0,
+      "files": [],
+      "missing": [
+        "css/style.css (URGENT - extract from HTML)",
+        "css/form-styles.css",
+        "css/result-styles.css",
+        "css/modal-styles.css",
+        "css/responsive.css"
+      ],
+      "blocker": "blocker-002"
+    },
+    "js": {
+      "total": 14,
+      "completed": 0,
+      "in_progress": 0,
+      "pending": 14,
+      "percentage": 0,
+      "files": [],
+      "missing": [
+        "js/calculator-core.js (CRITICAL - 500+ lines)",
+        "js/app.js (CRITICAL - 300+ lines)",
+        "js/ui-manager.js (200+ lines)",
+        "js/data-loader.js (150+ lines)",
+        "js/form-handler.js (200+ lines)",
+        "js/validation.js (150+ lines)",
+        "js/pdf-exporter.js (250+ lines)",
+        "js/modal-manager.js (100+ lines)",
+        "js/share-manager.js (100+ lines)",
+        "js/language-switcher.js (100+ lines)",
+        "js/service-worker.js (200+ lines)",
+        "js/utils.js (100+ lines)",
+        "js/constants.js (50+ lines)",
+        "js/config.js (50+ lines)"
+      ],
+      "blocker": "blocker-001",
+      "estimated_lines": "2200+ total lines of code"
+    },
+    "data": {
+      "total": 68,
+      "completed": 0,
+      "in_progress": 0,
+      "pending": 68,
+      "percentage": 0,
+      "files": [],
+      "breakdown": {
+        "heirs": {
+          "total": 17,
+          "completed": 0,
+          "files": [
+            "father.json", "mother.json", "son.json", "daughter.json",
+            "husband.json", "wife.json", "grandfather.json", "grandmother.json",
+            "full-brother.json", "full-sister.json", "paternal-brother.json",
+            "paternal-sister.json", "maternal-brother.json", "maternal-sister.json",
+            "nephew.json", "uncle.json", "freed-slave.json"
+          ]
+        },
+        "dalil_quran": {
+          "total": 10,
+          "completed": 0,
+          "priority_files": [
+            "an-nisa-11.json (CRITICAL)",
+            "an-nisa-12.json (CRITICAL)",
+            "an-nisa-176.json"
+          ]
+        },
+        "hadith": {
+          "total": 10,
+          "completed": 0
+        },
+        "education": {
+          "total": 8,
+          "completed": 0,
+          "topics": ["aul", "radd", "hijab", "muqasamah", "ashabah", "furudh", "mawani", "special-cases"]
+        },
+        "mazhab_comparison": {
+          "total": 5,
+          "completed": 0
+        },
+        "faq": {
+          "total": 8,
+          "completed": 0
+        },
+        "glossary": {
+          "total": 10,
+          "completed": 0
+        }
+      },
+      "blocker": "blocker-004"
+    },
+    "lib": {
+      "total": 3,
+      "completed": 2,
+      "in_progress": 0,
+      "pending": 1,
+      "percentage": 66.7,
+      "files": [
+        {
+          "name": "lib/fraction.min.js",
+          "size": "~25 KB",
+          "version": "4.3.7",
+          "status": "completed",
+          "required": true,
+          "purpose": "Precise fraction calculations"
+        },
+        {
+          "name": "lib/jspdf.min.js",
+          "size": "~180 KB",
+          "version": "2.5.1",
+          "status": "completed",
+          "required": true,
+          "purpose": "PDF export functionality"
+        }
+      ],
+      "missing": [
+        {
+          "name": "lib/i18next.min.js",
+          "required": false,
+          "purpose": "Advanced internationalization (optional)"
+        }
+      ]
+    },
+    "i18n": {
+      "total": 2,
+      "completed": 0,
+      "in_progress": 0,
+      "pending": 2,
+      "percentage": 0,
+      "files": [],
+      "missing": [
+        "i18n/id.json (Indonesian translations)",
+        "i18n/en.json (English translations)"
+      ]
+    },
+    "other": {
+      "total": 24,
+      "completed": 1,
+      "in_progress": 0,
+      "pending": 23,
+      "percentage": 4.2,
+      "files": [
+        {
+          "name": ".gitignore",
+          "status": "completed",
+          "size": "~1 KB"
+        }
+      ],
+      "missing": [
+        "README.md (project documentation)",
+        "LICENSE (MIT license)",
+        "manifest.json (PWA manifest)",
+        "robots.txt (SEO)",
+        "sitemap.xml (SEO)",
+        "favicon.ico",
+        "Various icons (16x16 to 512x512)",
+        "Various images and assets"
+      ]
+    }
+  },
+  "tasks": {
+    "total": 9,
+    "completed": 1,
+    "in_progress": 0,
+    "pending": 8,
+    "percentage": 11.1,
+    "by_priority": {
+      "P0": {
+        "total": 4,
+        "completed": 1,
+        "remaining": 3,
+        "tasks": ["task-001", "task-002", "task-003"]
+      },
+      "P1": {
+        "total": 4,
+        "completed": 0,
+        "remaining": 4,
+        "tasks": ["task-004", "task-005", "task-006", "task-007"]
+      },
+      "P2": {
+        "total": 1,
+        "completed": 0,
+        "remaining": 1,
+        "tasks": ["task-008"]
+      }
+    },
+    "by_phase": {
+      "fase-0": {
+        "total": 2,
+        "completed": 1,
+        "remaining": 1,
+        "tasks": ["task-000 (completed)", "task-001 (pending)"]
+      },
+      "fase-1": {
+        "total": 4,
+        "completed": 0,
+        "remaining": 4,
+        "tasks": ["task-002", "task-003", "task-004", "task-007"]
+      },
+      "fase-2": {
+        "total": 3,
+        "completed": 0,
+        "remaining": 3,
+        "tasks": ["task-005", "task-006", "task-008"]
+      }
+    },
+    "recently_completed": [
+      {
+        "id": "task-000",
+        "title": "Quick Setup",
+        "completed_at": "2026-01-08T07:15:00+07:00",
+        "time_spent": "15 minutes"
+      }
+    ]
+  },
+  "velocity": {
+    "tasks_per_week": 3.5,
+    "files_per_week": 17.5,
+    "estimated_completion_date": "2026-04-15",
+    "days_elapsed": 2,
+    "days_remaining": 95,
+    "burn_rate": "On track"
+  },
+  "health": {
+    "overall_score": 2.5,
+    "completeness": 1.0,
+    "correctness": 4.0,
+    "consistency": 3.0,
+    "maintainability": 2.0,
+    "documentation": 3.0
+  }
+}
