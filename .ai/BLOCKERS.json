@@ -1,0 +1,47 @@
+{
+  "project": "Faraidh WAISB",
+  "last_update": "2026-01-09T05:47:00+07:00",
+  "updated_by": "Option A migration",
+  "summary": {
+    "total_blockers": 3,
+    "critical": 3,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "resolved": 1,
+    "total_ever": 4
+  },
+  "active_blockers": [
+    {
+      "id": "blocker-001",
+      "priority": "P0",
+      "severity": "critical",
+      "title": "Tidak ada JavaScript files sama sekali",
+      "description": "App hanya HTML statis, tidak bisa calculate apapun. Semua 14 JS files missing.",
+      "impact": "BLOCKING - Application cannot function without core calculator logic",
+      "created_at": "2026-01-07T20:00:00+07:00",
+      "status": "open",
+      "category": "missing_files",
+      "files_needed": [
+        {
+          "file": "calculator-core.js",
+          "lines": "500+",
+          "priority": "CRITICAL",
+          "description": "Core waris calculation engine"
+        }
+      ],
+      "estimated_effort": "5 days for core functionality",
+      "blocks_tasks": ["task-003", "task-004", "task-007"],
+      "resolution_plan": "Complete task-002 (calculator-core.js) first"
+    }
+  ],
+  "resolved_blockers": [
+    {
+      "id": "blocker-003",
+      "title": "Tidak ada library Fraction.js",
+      "resolved_at": "2026-01-08T07:15:00+07:00",
+      "status": "resolved",
+      "resolution": "Downloaded fraction.min.js v4.3.7 successfully"
+    }
+  ]
+}
