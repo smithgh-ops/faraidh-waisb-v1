@@ -1,0 +1,221 @@
+{
+  "task_types": {
+    "setup": {
+      "definition_of_done": [
+        "Files/folders created",
+        "No errors",
+        "Documentation updated"
+      ]
+    },
+    "javascript_file": {
+      "definition_of_done": [
+        "No syntax errors",
+        "JSDoc comments",
+        "Error handling",
+        "Tested"
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "id": "task-000",
+      "title": "⚡ QUICK SETUP: Create folder structure & download libraries",
+      "type": "setup",
+      "priority": "P0",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "15 minutes",
+      "dependencies": [],
+      "blocks": [
+        "task-001",
+        "task-002",
+        "task-003"
+      ],
+      "deliverables": [
+        "Folder structure created",
+        "lib/fraction.min.js downloaded",
+        ".gitignore created"
+      ],
+      "acceptance_criteria": [
+        "All folders exist: css/, js/, data/, lib/, assets/, i18n/",
+        "fraction.min.js < 30 KB",
+        "jspdf.min.js < 200 KB"
+      ]
+    },
+    {
+      "id": "task-001",
+      "title": "📝 Extract CSS from HTML to external files",
+      "type": "css_file",
+      "priority": "P0",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "4-6 hours",
+      "dependencies": [
+        "task-000"
+      ],
+      "deliverables": [
+        "css/style.css (35 KB)",
+        "css/variables.css (3 KB)"
+      ],
+      "acceptance_criteria": [
+        "All inline styles removed",
+        "CSS linked via <link>",
+        "Uses CSS variables",
+        "No visual regression"
+      ]
+    },
+    {
+      "id": "task-002",
+      "title": "🧮 Build calculator-core.js - Main Engine",
+      "type": "javascript_file",
+      "priority": "P0",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "3-4 days",
+      "dependencies": [
+        "task-000"
+      ],
+      "blocks": [
+        "task-004",
+        "task-010"
+      ],
+      "deliverables": [
+        "js/calculator-core.js (85 KB)",
+        "InheritanceCalculator class"
+      ],
+      "acceptance_criteria": [
+        "Can calculate 4 heirs minimum",
+        "Returns Fraction objects",
+        "Validates heirs",
+        "Implements hijab rules",
+        "Detects Aul & Radd"
+      ],
+      "example_usage": "\n// Example usage\nconst calc = new InheritanceCalculator('jumhur');\nconst result = calc.calculate(\n    { harta: new Fraction(1000000), jenis_kelamin: 'laki' },\n    [\n        { id: 'father', jumlah: 1 },\n        { id: 'mother', jumlah: 1 },\n        { id: 'son', jumlah: 2, jenis_kelamin: 'laki' }\n    ]\n);\n"
+    },
+    {
+      "id": "task-003",
+      "title": "🎨 Create app.js - Application Initialization",
+      "type": "javascript_file",
+      "priority": "P0",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "1 day",
+      "dependencies": [
+        "task-000",
+        "task-002"
+      ],
+      "deliverables": [
+        "js/app.js (12 KB)",
+        "Form to calculator connection"
+      ],
+      "acceptance_criteria": [
+        "Captures form data",
+        "Calls calculator",
+        "Displays results",
+        "Shows errors clearly"
+      ],
+      "structure": "\n// app.js structure\ndocument.addEventListener('DOMContentLoaded', () => {\n    const calculator = new InheritanceCalculator('jumhur');\n    const form = document.querySelector('#inheritance-form');\n\n    form.addEventListener('submit', async (e) => {\n        e.preventDefault();\n        const formData = collectFormData(form);\n        const result = calculator.calculate(formData.pewaris, formData.heirs);\n        displayResults(result);\n    });\n});\n"
+    },
+    {
+      "id": "task-004",
+      "title": "📄 Create result.html - Results Display",
+      "type": "html_file",
+      "priority": "P1",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "1 day",
+      "dependencies": [
+        "task-001",
+        "task-002"
+      ],
+      "deliverables": [
+        "result.html (30 KB)"
+      ],
+      "acceptance_criteria": [
+        "Shows shares as fractions",
+        "Shows dalil links",
+        "Export buttons (PDF, Print)",
+        "Responsive design"
+      ]
+    },
+    {
+      "id": "task-005",
+      "title": "📊 Create 4 Primary Heir JSON Files",
+      "type": "data_file",
+      "priority": "P1",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "6-8 hours",
+      "dependencies": [
+        "task-000"
+      ],
+      "deliverables": [
+        "data/heirs/primary/father.json (65 KB)",
+        "data/heirs/primary/mother.json (62 KB)",
+        "data/heirs/primary/son.json (55 KB)",
+        "data/heirs/primary/daughter.json (70 KB)"
+      ],
+      "acceptance_criteria": [
+        "All required fields present",
+        "5 mazhabs defined",
+        "Dalil references added",
+        "JSON validates"
+      ]
+    },
+    {
+      "id": "task-006",
+      "title": "🕌 Create 2 Essential Dalil Quran Files",
+      "type": "data_file",
+      "priority": "P1",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "4 hours",
+      "dependencies": [
+        "task-000"
+      ],
+      "deliverables": [
+        "data/dalil/quran/an-nisa-11.json (30 KB)",
+        "data/dalil/quran/an-nisa-12.json (28 KB)"
+      ],
+      "acceptance_criteria": [
+        "Arabic text with tashkeel",
+        "Translation ID + EN",
+        "Tafsir brief",
+        "3+ kitab references"
+      ]
+    },
+    {
+      "id": "task-007",
+      "title": "📱 Create manifest.json - PWA Config",
+      "type": "setup",
+      "priority": "P2",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "30 minutes",
+      "dependencies": [
+        "task-000"
+      ],
+      "deliverables": [
+        "manifest.json (2 KB)",
+        "PWA icons"
+      ]
+    },
+    {
+      "id": "task-008",
+      "title": "🌐 Create i18n system",
+      "type": "javascript_file",
+      "priority": "P2",
+      "status": "open",
+      "phase": "fase-0",
+      "estimated_effort": "1 day",
+      "dependencies": [
+        "task-000"
+      ],
+      "deliverables": [
+        "i18n/id.json (45 KB)",
+        "i18n/en.json (42 KB)",
+        "js/i18n.js (8 KB)"
+      ]
+    }
+  ]
+}
