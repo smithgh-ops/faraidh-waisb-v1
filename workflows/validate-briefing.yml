@@ -1,0 +1,223 @@
+name: Validate Smart Brief System
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+    paths:
+      - '.ai/**/*.json'
+      - '.ai/**/*.md'
+      - '.ai/**/*.js'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - '.ai/**/*.json'
+      - '.ai/**/*.md'
+
+jobs:
+  validate-json:
+    name: 🔍 Validate JSON Files
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: 📦 Install jq (JSON processor)
+        run: sudo apt-get update && sudo apt-get install -y jq
+      
+      - name: ✅ Validate JSON syntax
+        run: |
+          echo "🔍 Validating JSON syntax..."
+          EXIT_CODE=0
+          
+          for file in .ai/*.json; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file")
+              echo "Checking: $filename"
+              if jq empty "$file" 2>/dev/null; then
+                echo "  ✅ Valid JSON syntax"
+              else
+                echo "  ❌ Invalid JSON syntax!"
+                EXIT_CODE=1
+              fi
+            fi
+          done
+          
+          echo ""
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "✅ All JSON files have valid syntax"
+          else
+            echo "❌ Some JSON files have syntax errors"
+            exit 1
+          fi
+      
+      - name: 📋 Check for required files
+        run: |
+          echo "🔍 Checking required briefing files..."
+          REQUIRED_FILES=(
+            ".ai/STATUS.json"
+            ".ai/PROGRESS.json"
+            ".ai/BLOCKERS.json"
+            ".ai/TASKS_FIXED.json"
+            ".ai/CHANGELOG.json"
+            ".ai/ENVIRONMENT.json"
+            ".ai/HEALTH.json"
+            ".ai/validate-consistency.js"
+            ".ai/update-all.js"
+            ".ai/.copilot-config.json"
+          )
+          
+          MISSING=0
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "  ❌ Missing: $file"
+              MISSING=1
+            else
+              echo "  ✅ Found: $file"
+            fi
+          done
+          
+          echo ""
+          if [ $MISSING -eq 0 ]; then
+            echo "✅ All required files present (10/10)"
+          else
+            echo "❌ Some required files are missing"
+            exit 1
+          fi
+      
+      - name: 🔬 Run consistency validation
+        run: |
+          echo "🔍 Running comprehensive consistency validation..."
+          echo ""
+          node .ai/validate-consistency.js
+          
+          VALIDATION_EXIT=$?
+          echo ""
+          
+          if [ $VALIDATION_EXIT -eq 0 ]; then
+            echo "✅ Consistency validation passed"
+          else
+            echo "❌ Consistency validation failed"
+            echo "Fix errors above and commit again"
+            exit 1
+          fi
+      
+      - name: 📏 Check file sizes
+        run: |
+          echo "🔍 Checking file sizes..."
+          echo ""
+          
+          # Check if any JSON file is too large (> 50 KB)
+          LARGE_FILES=$(find .ai -name "*.json" -size +50k)
+          
+          if [ -z "$LARGE_FILES" ]; then
+            echo "✅ All JSON files are within size limits (< 50 KB)"
+          else
+            echo "⚠️  Warning: Large JSON files detected:"
+            echo "$LARGE_FILES"
+            echo ""
+            echo "Consider splitting large files for better GitHub Copilot performance"
+            echo "Target: < 200 lines per JSON file"
+          fi
+          
+          # List all JSON file sizes
+          echo ""
+          echo "📊 JSON file sizes:"
+          find .ai -name "*.json" -exec du -h {} \; | sort -h
+  
+  generate-summary:
+    name: 📊 Generate Summary
+    runs-on: ubuntu-latest
+    needs: validate-json
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: 📝 Generate summary
+        run: |
+          echo "📊 Generating SUMMARY_FIXED.md..."
+          node .ai/generate-summary.js
+          
+          if [ $? -eq 0 ]; then
+            echo "✅ Summary generated successfully"
+          else
+            echo "❌ Summary generation failed"
+            exit 1
+          fi
+      
+      - name: 🔍 Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet .ai/SUMMARY_FIXED.md; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No changes in SUMMARY_FIXED.md"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "✅ SUMMARY_FIXED.md has been updated"
+          fi
+      
+      - name: 💾 Commit updated summary
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add .ai/SUMMARY_FIXED.md
+          git commit -m "chore: Auto-update SUMMARY_FIXED.md [skip ci]
+          
+          Auto-generated by GitHub Actions after briefing file updates"
+          
+          git push
+          
+          echo "✅ Summary committed and pushed to main"
+  
+  notify-status:
+    name: 📢 Notify Validation Status
+    runs-on: ubuntu-latest
+    needs: [validate-json, generate-summary]
+    if: always()
+    
+    steps:
+      - name: ✅ Check overall status
+        run: |
+          echo "🔍 Checking validation results..."
+          echo ""
+          echo "Results:"
+          echo "  - JSON Validation: ${{ needs.validate-json.result }}"
+          echo "  - Summary Generation: ${{ needs.generate-summary.result }}"
+          echo ""
+          
+          if [ "${{ needs.validate-json.result }}" == "success" ]; then
+            if [ "${{ needs.generate-summary.result }}" == "success" ] || [ "${{ needs.generate-summary.result }}" == "skipped" ]; then
+              echo "✅ All checks passed successfully!"
+              echo "::notice::Smart Brief System validation complete - all files consistent"
+              exit 0
+            fi
+          fi
+          
+          echo "❌ Some checks failed"
+          echo "::error::Smart Brief System validation failed - check logs above"
+          exit 1
