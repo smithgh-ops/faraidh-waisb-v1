@@ -1,0 +1,286 @@
+{
+  "project": {
+    "name": "Kalkulator Waris Islam",
+    "version": "1.0.0",
+    "type": "Progressive Web Application (PWA)",
+    "target_platforms": [
+      "Web",
+      "Mobile Web",
+      "Desktop (via browser)"
+    ],
+    "live_url": "https://faraidh-waris-v1.netlify.app/",
+    "repository": "GitHub (to be added)",
+    "license": "Open Source (to be determined)"
+  },
+  "runtime": {
+    "node_version": "18.x or higher",
+    "npm_version": "9.x or higher",
+    "browser_targets": [
+      "Chrome 90+",
+      "Firefox 88+",
+      "Safari 14+",
+      "Edge 90+",
+      "Mobile Chrome (Android 8+)",
+      "Mobile Safari (iOS 13+)"
+    ],
+    "javascript_version": "ES6+ (ES2015 and above)",
+    "polyfills_needed": [
+      "None required (all features natively supported in target browsers)"
+    ]
+  },
+  "dependencies": {
+    "production": {
+      "fraction.js": {
+        "version": "4.3.7",
+        "purpose": "Precise fraction calculations (no rounding errors)",
+        "size": "25 KB",
+        "critical": true,
+        "cdn_url": "https://cdn.jsdelivr.net/npm/fraction.js@4.3.7/fraction.min.js",
+        "local_path": "lib/fraction.min.js"
+      },
+      "jspdf": {
+        "version": "2.5.1",
+        "purpose": "PDF generation for export feature",
+        "size": "180 KB",
+        "critical": false,
+        "cdn_url": "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+        "local_path": "lib/jspdf.min.js"
+      },
+      "html2canvas": {
+        "version": "1.4.1",
+        "purpose": "Screenshot capture for PDF export",
+        "size": "180 KB",
+        "critical": false,
+        "cdn_url": "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
+        "local_path": "lib/html2canvas.min.js"
+      }
+    },
+    "development": {
+      "live-server": {
+        "version": "1.2.2",
+        "purpose": "Local development server with hot reload",
+        "install": "npm install -g live-server"
+      }
+    }
+  },
+  "constraints": {
+    "no_frameworks": {
+      "rule": "Must use Vanilla JavaScript only",
+      "reason": "Minimize bundle size, maximize offline performance",
+      "prohibited": [
+        "React",
+        "Vue",
+        "Angular",
+        "Svelte",
+        "jQuery"
+      ],
+      "exception": "None - pure Vanilla JS only"
+    },
+    "no_bundler": {
+      "rule": "No webpack/vite/rollup bundler",
+      "reason": "Simple deployment, no build step needed",
+      "exception": "Can use simple minifier for production (optional)"
+    },
+    "no_typescript": {
+      "rule": "Pure JavaScript (no TypeScript)",
+      "reason": "Simplicity, no compilation needed",
+      "exception": "Can use JSDoc for type hints (optional)"
+    },
+    "no_css_framework": {
+      "rule": "Custom CSS only (no Tailwind/Bootstrap)",
+      "reason": "File size optimization, custom design needed",
+      "exception": "Can use CSS reset/normalize (already included)"
+    },
+    "max_bundle_size": {
+      "rule": "Total app size < 5 MB",
+      "current": "4.6 MB",
+      "breakdown": {
+        "JavaScript": "485 KB",
+        "CSS": "82 KB",
+        "Data JSON": "2,450 KB",
+        "Libraries": "385 KB",
+        "Assets": "850 KB",
+        "i18n": "120 KB",
+        "Templates": "95 KB",
+        "Others": "133 KB"
+      },
+      "enforcement": "Strict - check file sizes before commit"
+    },
+    "offline_first": {
+      "rule": "App must work offline after first load",
+      "implementation": "Service Worker with Cache-first strategy",
+      "cache_strategy": {
+        "static_assets": "Cache-first with network fallback",
+        "data_json": "Stale-while-revalidate",
+        "api_calls": "Network-first with cache fallback (if API added)"
+      }
+    }
+  },
+  "performance_targets": {
+    "initial_load": {
+      "target": "< 3 seconds",
+      "measurement": "Time to First Contentful Paint (FCP)",
+      "network": "4G connection (4 Mbps)"
+    },
+    "time_to_interactive": {
+      "target": "< 5 seconds",
+      "measurement": "Time to Interactive (TTI)"
+    },
+    "lighthouse_scores": {
+      "performance": "> 90",
+      "accessibility": "> 90",
+      "best_practices": "> 90",
+      "seo": "> 90",
+      "pwa": "> 90"
+    },
+    "calculation_speed": {
+      "simple_case": "< 100ms (4-6 heirs)",
+      "complex_case": "< 500ms (15+ heirs with aul/radd)"
+    }
+  },
+  "code_standards": {
+    "javascript": {
+      "style": "StandardJS / Airbnb style guide",
+      "naming": {
+        "variables": "camelCase",
+        "constants": "UPPER_SNAKE_CASE",
+        "classes": "PascalCase",
+        "functions": "camelCase",
+        "files": "kebab-case.js"
+      },
+      "documentation": "JSDoc comments for all functions",
+      "error_handling": "Always use try-catch for critical operations",
+      "logging": "Use console.error for errors, console.warn for warnings (remove console.log in production)"
+    },
+    "css": {
+      "methodology": "Custom CSS with CSS Variables",
+      "naming": "BEM-like (block__element--modifier)",
+      "organization": "Split by concern (style.css, layout.css, components.css, themes/)",
+      "mobile_first": "Always write mobile styles first, then add @media for larger screens"
+    },
+    "html": {
+      "doctype": "HTML5",
+      "semantic": "Use semantic tags (<header>, <nav>, <main>, <section>, <article>, <footer>)",
+      "accessibility": "ARIA labels where needed, alt text for images, keyboard navigation support"
+    },
+    "json": {
+      "formatting": "Pretty-print with 2-space indentation",
+      "validation": "Must pass JSON schema validation before commit",
+      "encoding": "UTF-8 with BOM for Arabic text support"
+    }
+  },
+  "file_organization": {
+    "root_files": [
+      "index.html",
+      "manifest.json",
+      "service-worker.js",
+      "config.js",
+      "README.md",
+      ".gitignore"
+    ],
+    "folders": {
+      "css/": "Stylesheets (5 files)",
+      "js/": "JavaScript modules (14 files)",
+      "data/": "JSON data files (68 files)",
+      "i18n/": "Translation files (2 files)",
+      "templates/": "HTML templates (6 files)",
+      "assets/": "Images, icons, fonts (14 files)",
+      "lib/": "Third-party libraries (3 files)",
+      "docs/": "Documentation (6 files)",
+      ".ai/": "AI briefing system (12 files)"
+    },
+    "naming_convention": {
+      "html": "kebab-case.html",
+      "css": "kebab-case.css",
+      "js": "kebab-case.js",
+      "json": "kebab-case.json (or snake_case for specific files)",
+      "md": "UPPERCASE.md for important docs, kebab-case.md for others"
+    }
+  },
+  "deployment": {
+    "platform": "Netlify",
+    "build_command": "None (no build step)",
+    "publish_directory": ".",
+    "environment_variables": {
+      "NODE_ENV": "production (for future if needed)"
+    },
+    "custom_domain": "To be configured",
+    "ssl": "Automatic via Netlify",
+    "cdn": "Netlify CDN",
+    "deploy_trigger": "Auto-deploy on git push to main branch"
+  },
+  "development_workflow": {
+    "local_server": {
+      "command": "live-server",
+      "port": 8080,
+      "auto_reload": true
+    },
+    "testing": {
+      "unit_tests": "None currently (can add later)",
+      "manual_testing": "Test on Chrome, Firefox, Safari, Mobile browsers",
+      "test_cases": "See TEMPLATES.md for test case format"
+    },
+    "version_control": {
+      "system": "Git",
+      "branching_strategy": "main (production), feat/* (features), fix/* (bug fixes)",
+      "commit_message_format": "See TEMPLATES.md"
+    }
+  },
+  "browser_support": {
+    "required_features": [
+      "ES6 modules",
+      "Fetch API",
+      "LocalStorage",
+      "Service Worker",
+      "CSS Grid",
+      "CSS Flexbox",
+      "CSS Variables (Custom Properties)",
+      "Intersection Observer (for lazy loading)"
+    ],
+    "optional_features": [
+      "Web Share API (for sharing results)",
+      "Navigator.share (mobile sharing)",
+      "matchMedia (for responsive checks)"
+    ],
+    "not_supported": {
+      "browsers": [
+        "IE11",
+        "Opera Mini",
+        "UC Browser < 13"
+      ],
+      "fallback": "Show message: 'Please use modern browser (Chrome/Firefox/Safari/Edge)'"
+    }
+  },
+  "api_integrations": {
+    "current": "None (fully offline app)",
+    "future_planned": [
+      "Optional: Analytics (privacy-respecting)",
+      "Optional: Feedback system",
+      "Optional: Cloud backup of calculations"
+    ]
+  },
+  "security": {
+    "xss_prevention": "Sanitize all user inputs before rendering",
+    "csp": "Content Security Policy headers (to be configured in Netlify)",
+    "https_only": "Yes (enforced by Netlify)",
+    "data_privacy": "No user data collected or stored on server (all calculations local)",
+    "pii_handling": "User can optionally save to localStorage (local only, not transmitted)"
+  },
+  "internationalization": {
+    "languages": [
+      "id",
+      "en"
+    ],
+    "default_language": "id",
+    "language_detection": "Browser language or user selection (stored in localStorage)",
+    "rtl_support": "Partial (for Arabic text only, not full RTL layout)",
+    "date_format": "ISO 8601 (YYYY-MM-DD)",
+    "number_format": "Indonesian: 1.000.000,00 | English: 1,000,000.00"
+  },
+  "maintenance": {
+    "update_frequency": "As needed (no scheduled releases)",
+    "breaking_changes": "Avoid if possible, document if necessary",
+    "deprecation_policy": "Announce 1 month before removing features",
+    "support_channels": "GitHub Issues (to be set up)"
+  }
+}
