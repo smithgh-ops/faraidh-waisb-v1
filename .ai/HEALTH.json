@@ -1,0 +1,233 @@
+{
+  "_meta": {
+    "description": "Auto-generated health metrics for project monitoring",
+    "generated_at": "2026-01-03T11:09:00+07:00",
+    "generated_by": "System Auto-Update",
+    "update_frequency": "After each AI session"
+  },
+
+  "project_health": {
+    "overall_status": "healthy",
+    "risk_level": "low",
+    "confidence_score": 85,
+    "last_assessment": "2026-01-03T11:09:00+07:00"
+  },
+
+  "progress_metrics": {
+    "completion": {
+      "current": 16,
+      "target": 100,
+      "unit": "percent",
+      "status": "on_track"
+    },
+    "velocity": {
+      "last_7_days": 2,
+      "last_30_days": 8,
+      "average_daily": 0.5,
+      "target_daily": 1.4,
+      "status": "below_target",
+      "alert": "⚠️ Velocity below target - consider breaking tasks smaller"
+    },
+    "files": {
+      "completed": 20,
+      "in_progress": 4,
+      "not_started": 100,
+      "total": 124,
+      "completion_rate": 16.1
+    }
+  },
+
+  "task_metrics": {
+    "total_tasks": 25,
+    "completed": 3,
+    "in_progress": 2,
+    "blocked": 2,
+    "open": 18,
+    "completion_rate": 12,
+    "average_completion_time": {
+      "value": 2.5,
+      "unit": "hours",
+      "sample_size": 3
+    }
+  },
+
+  "blocker_analysis": {
+    "total_blockers": 3,
+    "critical_blockers": 3,
+    "oldest_blocker": {
+      "id": "blocker-1",
+      "task": "calculator-core.js tidak ada",
+      "priority": "P0",
+      "days_open": 2,
+      "threshold": 3,
+      "status": "at_risk"
+    },
+    "blocking_impact": {
+      "tasks_blocked": 5,
+      "percentage_blocked": 20
+    },
+    "recommendations": [
+      "🔴 URGENT: Resolve blocker-1 (calculator-core.js) - blocks 5 tasks",
+      "🔴 URGENT: Complete data/*.json files - foundation for all features",
+      "🟡 Consider parallel work on independent tasks (templates, assets)"
+    ]
+  },
+
+  "quality_metrics": {
+    "code_quality": {
+      "files_with_validation": 0,
+      "files_with_tests": 0,
+      "files_with_docs": 20,
+      "score": 30,
+      "status": "needs_improvement"
+    },
+    "data_completeness": {
+      "json_files_complete": 4,
+      "json_files_placeholder": 64,
+      "completeness_rate": 5.9,
+      "status": "critical"
+    },
+    "documentation": {
+      "files_documented": 1,
+      "apis_documented": 0,
+      "coverage": 10,
+      "status": "poor"
+    }
+  },
+
+  "phase_status": {
+    "current_phase": {
+      "id": "fase-1",
+      "name": "Core Calculator & Basic UI",
+      "target_files": 35,
+      "completed_files": 20,
+      "progress": 57,
+      "status": "in_progress",
+      "estimated_completion": "2026-01-10",
+      "days_remaining": 7
+    },
+    "phase_timeline": [
+      {
+        "phase": "Fase 1",
+        "status": "in_progress",
+        "progress": 57,
+        "health": "at_risk"
+      },
+      {
+        "phase": "Fase 2",
+        "status": "not_started",
+        "progress": 0,
+        "health": "unknown"
+      },
+      {
+        "phase": "Fase 3",
+        "status": "not_started",
+        "progress": 0,
+        "health": "unknown"
+      },
+      {
+        "phase": "Fase 4",
+        "status": "not_started",
+        "progress": 0,
+        "health": "unknown"
+      },
+      {
+        "phase": "Fase 5",
+        "status": "not_started",
+        "progress": 0,
+        "health": "unknown"
+      }
+    ]
+  },
+
+  "team_metrics": {
+    "active_ai_sessions": 0,
+    "total_sessions_completed": 5,
+    "human_reviews_pending": 0,
+    "human_reviews_completed": 0,
+    "collaboration_score": 0
+  },
+
+  "risk_assessment": {
+    "high_risks": [
+      {
+        "id": "risk-001",
+        "description": "calculator-core.js belum dibuat - jantung aplikasi",
+        "impact": "critical",
+        "probability": "high",
+        "mitigation": "Prioritize immediate development with clear acceptance criteria"
+      },
+      {
+        "id": "risk-002",
+        "description": "68 JSON files mayoritas kosong - no data to display",
+        "impact": "critical",
+        "probability": "high",
+        "mitigation": "Start with priority files: heirs/primary/*.json"
+      }
+    ],
+    "medium_risks": [
+      {
+        "id": "risk-003",
+        "description": "No testing strategy - bugs might accumulate",
+        "impact": "medium",
+        "probability": "medium",
+        "mitigation": "Add validation scripts and manual testing checklist"
+      }
+    ],
+    "low_risks": []
+  },
+
+  "recommendations": {
+    "immediate_actions": [
+      "🔴 Build js/calculator-core.js (P0) - Estimated: 3 days",
+      "🔴 Fill data/heirs/primary/father.json + mother.json (P0) - Estimated: 4 hours",
+      "🔴 Create templates/popup-warning.html (P1) - Estimated: 2 hours"
+    ],
+    "short_term": [
+      "🟡 Split CSS to modular files (layout, components, themes)",
+      "🟡 Implement 5 mazhab logic in calculator-core.js",
+      "🟡 Set up PWA (manifest.json + service-worker.js)"
+    ],
+    "long_term": [
+      "🟢 Complete all 68 JSON data files",
+      "🟢 Build quiz interactive module",
+      "🟢 Add comprehensive testing"
+    ]
+  },
+
+  "trend_analysis": {
+    "last_7_days": {
+      "files_added": 2,
+      "files_modified": 3,
+      "progress_change": "+2%",
+      "trend": "slow_growth"
+    },
+    "projection": {
+      "estimated_completion_date": "2026-03-15",
+      "confidence": "low",
+      "assumptions": [
+        "Current velocity maintained",
+        "No major blockers",
+        "Consistent AI sessions"
+      ]
+    }
+  },
+
+  "alerts": [
+    {
+      "level": "critical",
+      "message": "🔴 3 P0 blockers open - immediate attention required",
+      "action": "Resolve calculator-core.js and data files"
+    },
+    {
+      "level": "warning",
+      "message": "⚠️ Velocity below target (0.5 vs 1.4 daily progress)",
+      "action": "Consider breaking tasks into smaller chunks"
+    },
+    {
+      "level": "info",
+      "message": "ℹ️ No human review in last 7 days",
+      "action": "Schedule review checkpoint"
+    }
+  ]
+}
